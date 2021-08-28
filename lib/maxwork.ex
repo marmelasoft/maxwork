@@ -3,8 +3,11 @@ defmodule Maxwork do
   def get_listing(id) do
     case HTTPoison.get("https://s.maxwork.pt/site/static/9/listings/details/" <> id <> ".html") do
       {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
-          %{ agent_name: get_agent_name(body),
+          %{ id: id,
+             title: get_title(body),
+             agent_name: get_agent_name(body),
              agent_picture: get_agent_picture(body),
+             address: get_address(body),
              price: get_price(body),
              bedroom: get_bedroom(body),
              bathroom: get_bathroom(body),
@@ -16,6 +19,22 @@ defmodule Maxwork do
       {:error, %HTTPoison.Error{reason: reason}} ->
         IO.inspect(reason)
     end
+  end
+
+  defp get_title(body) do
+    body
+    |> Floki.find(".listing-title")
+    |> hd
+    |> elem(2)
+    |> hd
+  end
+
+  defp get_address(body) do
+    body
+    |> Floki.find(".listing-address")
+    |> hd
+    |> elem(2)
+    |> List.last()
   end
 
   defp get_agent_name(body) do
