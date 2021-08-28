@@ -27,6 +27,7 @@ defmodule Maxwork do
     |> hd
     |> elem(2)
     |> hd
+    |> String.trim()
   end
 
   defp get_address(body) do
@@ -35,6 +36,7 @@ defmodule Maxwork do
     |> hd
     |> elem(2)
     |> List.last()
+    |> String.trim()
   end
 
   defp get_agent_name(body) do
@@ -45,6 +47,7 @@ defmodule Maxwork do
     |> hd
     |> elem(2)
     |> hd
+    |> String.trim()
   end
 
   defp get_price(body) do
@@ -53,6 +56,7 @@ defmodule Maxwork do
     |> hd
     |> elem(2)
     |> hd
+    |> String.trim()
   end
 
   defp get_bedroom(body) do
@@ -61,6 +65,7 @@ defmodule Maxwork do
     |> hd
     |> elem(2)
     |> List.last()
+    |> String.trim()
   end
 
   defp get_bathroom(body) do
@@ -69,6 +74,7 @@ defmodule Maxwork do
     |> hd
     |> elem(2)
     |> List.last()
+    |> String.trim()
   end
 
   defp get_area(body) do
@@ -78,6 +84,7 @@ defmodule Maxwork do
     |> elem(2)
     |> tl
     |> hd
+    |> String.trim()
   end
 
   defp get_agent_picture(body) do
